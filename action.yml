@@ -1,0 +1,13 @@
+name: 'Task Completed Checker'
+description: 'An action that checks if all tasks are completed in the pull requests.'
+author: 'kentaro-m'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+inputs: 
+  repo-token:
+    description: 'The GITHUB_TOKEN secret'
+    required: true
+branding:
+  icon: 'check-square'
+  color: 'green'
