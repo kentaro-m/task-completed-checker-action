@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import {removeIgnoreTaskLitsText, createTaskListText} from './utils'
+import {removeIgnoreTaskListText, createTaskListText} from './utils'
 
 async function run(): Promise<void> {
   try {
@@ -31,7 +31,7 @@ async function run(): Promise<void> {
       return
     }
 
-    const result = removeIgnoreTaskLitsText(body)
+    const result = removeIgnoreTaskListText(body)
 
     core.debug('creates a list of tasks which removed ignored task: ')
     core.debug(result)

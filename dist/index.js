@@ -3539,7 +3539,7 @@ function run() {
                 });
                 return;
             }
-            const result = utils_1.removeIgnoreTaskLitsText(body);
+            const result = utils_1.removeIgnoreTaskListText(body);
             core.debug('creates a list of tasks which removed ignored task: ');
             core.debug(result);
             const isTaskCompleted = result.match(/(- \[[ ]\].+)/g) === null;
@@ -8360,10 +8360,10 @@ module.exports = require("http");
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-function removeIgnoreTaskLitsText(text) {
+function removeIgnoreTaskListText(text) {
     return text.replace(/<!-- ignore-task-list-start -->[\s| ]*(- \[[x| ]\] .+[\s| ]*)+<!-- ignore-task-list-end -->/g, '');
 }
-exports.removeIgnoreTaskLitsText = removeIgnoreTaskLitsText;
+exports.removeIgnoreTaskListText = removeIgnoreTaskListText;
 function createTaskListText(body) {
     const completedTasks = body.match(/(- \[[x]\].+)/g);
     const uncompletedTasks = body.match(/(- \[[ ]\].+)/g);
