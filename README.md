@@ -17,6 +17,7 @@ jobs:
       - uses: jemmic/task-completed-checker-action@v1.0.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          missing-as-error: false
 ```
 
 ### Check whether tasks are completed

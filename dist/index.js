@@ -3646,13 +3646,14 @@ function run() {
         try {
             const body = (_a = github.context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.body;
             const token = core.getInput('repo-token', { required: true });
+            const handleMissingTaskAsError = core.getBooleanInput('missing-as-error');
             const githubApi = new github.GitHub(token);
             const appName = 'Task Completed Checker';
             if (!body) {
                 core.info('no task list and skip the process.');
                 yield githubApi.checks.create({
                     name: appName,
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
                     head_sha: (_b = github.context.payload.pull_request) === null || _b === void 0 ? void 0 : _b.head.sha,
                     status: 'completed',
                     conclusion: 'success',
@@ -3674,9 +3675,9 @@ function run() {
             const text = utils_1.createTaskListText(result);
             core.debug('creates a list of completed tasks and uncompleted tasks: ');
             core.debug(text);
-            yield githubApi.checks.create({
+            const check = {
                 name: appName,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
                 head_sha: (_c = github.context.payload.pull_request) === null || _c === void 0 ? void 0 : _c.head.sha,
                 status: 'completed',
                 conclusion: isTaskCompleted ? 'success' : 'failure',
@@ -3690,7 +3691,19 @@ function run() {
                 },
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo
-            });
+            };
+            if (isTaskCompleted) {
+                check.status = 'completed';
+                check.conclusion = 'success';
+            }
+            else if (handleMissingTaskAsError) {
+                check.status = 'completed';
+                check.conclusion = 'failure';
+            }
+            else {
+                check.status = 'in_progress';
+            }
+            yield githubApi.checks.create(check);
         }
         catch (error) {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

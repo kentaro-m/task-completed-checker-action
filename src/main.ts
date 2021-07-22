@@ -1,12 +1,14 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 import {removeIgnoreTaskListText, createTaskListText} from './utils'
+import {Octokit} from '@octokit/rest'
 
 async function run(): Promise<void> {
   try {
     const body = github.context.payload.pull_request?.body
 
     const token = core.getInput('repo-token', {required: true})
+    const handleMissingTaskAsError = core.getBooleanInput('missing-as-error')
     const githubApi = new github.GitHub(token)
     const appName = 'Task Completed Checker'
 
@@ -14,7 +16,7 @@ async function run(): Promise<void> {
       core.info('no task list and skip the process.')
       await githubApi.checks.create({
         name: appName,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
         head_sha: github.context.payload.pull_request?.head.sha,
         status: 'completed',
         conclusion: 'success',
@@ -42,9 +44,9 @@ async function run(): Promise<void> {
     core.debug('creates a list of completed tasks and uncompleted tasks: ')
     core.debug(text)
 
-    await githubApi.checks.create({
+    const check: Octokit.RequestOptions & Octokit.ChecksCreateParams = {
       name: appName,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
       head_sha: github.context.payload.pull_request?.head.sha,
       status: 'completed',
       conclusion: isTaskCompleted ? 'success' : 'failure',
@@ -58,7 +60,17 @@ async function run(): Promise<void> {
       },
       owner: github.context.repo.owner,
       repo: github.context.repo.repo
-    })
+    }
+    if (isTaskCompleted) {
+      check.status = 'completed'
+      check.conclusion = 'success'
+    } else if (handleMissingTaskAsError) {
+      check.status = 'completed'
+      check.conclusion = 'failure'
+    } else {
+      check.status = 'in_progress'
+    }
+    await githubApi.checks.create(check)
   } catch (error) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     core.setFailed(error.message)

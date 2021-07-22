@@ -8,6 +8,10 @@ inputs:
   repo-token:
     description: 'The GITHUB_TOKEN secret'
     required: true
+  missing-as-error:
+    description: 'Whether to treat any missing tasks as an error. If true, pending tasks will be show the Task Completed Checker check as an error, pending otherwise.'
+    required: false
+    default: 'false'
 branding:
   icon: 'check-square'
   color: 'green'
