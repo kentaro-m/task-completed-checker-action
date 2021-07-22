@@ -1,12 +1,12 @@
 # Task Completed Checker Action
 A GitHub action that checks if all tasks are completed in the pull requests.
 
-## :arrow_forward: Usage
+## Usage
 
 ### Create a workflow
 ```yml
 name: 'PR Tasks Completed Check'
-on: 
+on:
   pull_request:
     types: [opened, edited]
 
@@ -14,7 +14,7 @@ jobs:
   task-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: kentaro-m/task-completed-checker-action@v0.1.0
+      - uses: jemmic/task-completed-checker-action@v1.0.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
@@ -39,9 +39,9 @@ For example:
 - [x] New and existing unit tests pass locally with my changes
 ```
 
-Create a pull request that contained tasks list to your repository and will be started automatically a workflow to check whether tasks are completed.
+Create a pull request that contains a tasks list to your repository and GitHub will start automatically a workflow to check whether tasks are completed.
 
-Every time edit a description of a pull request will be started automatically a new workflow to check.
+Every edit of the pull request description will automatically start a new workflow to check for completed tasks.
 
 This works only with task lists in the pull request description, not in comments.
 It works with task lists defined with either `*` or `-` characters.
