@@ -36,7 +36,7 @@ async function run(): Promise<void> {
     core.debug('creates a list of tasks which removed ignored task: ')
     core.debug(result)
 
-    const isTaskCompleted = result.match(/(- \[[ ]\].+)/g) === null
+    const isTaskCompleted = result.match(/([-*] \[[ ]\].+)/g) === null
 
     const text = createTaskListText(result)
 
