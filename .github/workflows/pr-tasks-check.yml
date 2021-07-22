@@ -7,6 +7,6 @@ jobs:
   task-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: kentaro-m/task-completed-checker-action@master
+      - uses: jemmic/task-completed-checker-action@master
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
