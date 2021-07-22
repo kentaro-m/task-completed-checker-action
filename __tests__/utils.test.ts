@@ -33,6 +33,8 @@ describe('removeIgnoreTaskListText', () => {
     const text = `<!-- ignore-task-list-start -->
     - [ ] foo
     - [x] qwer
+    - [x]
+    * [ ]
     * [ ] hello
     * [x] world
     <!-- ignore-task-list-end -->
