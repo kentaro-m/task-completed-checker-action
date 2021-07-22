@@ -1,12 +1,12 @@
 export function removeIgnoreTaskListText(text: string): string {
   return text.replace(
-    /<!-- ignore-task-list-start -->[\s| ]*([-*] \[[x| ]\]( .+)?[\s| ]*)+<!-- ignore-task-list-end -->/g,
+    /<!-- ignore-task-list-start -->[\s| ]*([-*] \[[xX ]\]( .+)?[\s| ]*)+<!-- ignore-task-list-end -->/g,
     ''
   )
 }
 
 export function createTaskListText(body: string): string {
-  const completedTasks = body.match(/([-*] \[[x]\].+)/g)
+  const completedTasks = body.match(/([-*] \[[xX]\].+)/g)
   const uncompletedTasks = body.match(/([-*] \[[ ]\].+)/g)
 
   let text = ''

@@ -8,12 +8,16 @@ describe('removeIgnoreTaskListText', () => {
     * [ ] Document
     - [x] Enhancement Feature
     <!-- ignore-task-list-end -->
+    <!-- ignore-task-list-start -->
+    - [ ] Other
+    * [X] list
+    <!-- ignore-task-list-end -->
     
     ## Checklist
     - [x] I have read the [CONTRIBUTING.md]()
     - [x] I have made corresponding changes to the documentation
     - [x] My changes generate no lint errors
-    - [x] I have added tests that prove my fix is effective or that my feature works
+    - [X] I have added tests that prove my fix is effective or that my feature works
     - [x] New and existing unit tests pass locally with my changes`
 
     const result = removeIgnoreTaskListText(text)
@@ -21,11 +25,12 @@ describe('removeIgnoreTaskListText', () => {
     expect(result).toEqual(`## Issue Type
     
     
+    
     ## Checklist
     - [x] I have read the [CONTRIBUTING.md]()
     - [x] I have made corresponding changes to the documentation
     - [x] My changes generate no lint errors
-    - [x] I have added tests that prove my fix is effective or that my feature works
+    - [X] I have added tests that prove my fix is effective or that my feature works
     - [x] New and existing unit tests pass locally with my changes`)
   })
 
@@ -85,7 +90,7 @@ describe('createTaskListText', () => {
     ## Checklist
     - [x] I have read the [CONTRIBUTING.md]()
     * [ ] I have made corresponding changes to the documentation
-    * [x] My changes generate no lint errors
+    * [X] My changes generate no lint errors
     - [ ] I have added tests that prove my fix is effective or that my feature works
     - [x] New and existing unit tests pass locally with my changes`
 
@@ -93,7 +98,7 @@ describe('createTaskListText', () => {
 
     expect(result).toEqual(`## :white_check_mark: Completed Tasks
 - [x] I have read the [CONTRIBUTING.md]()
-* [x] My changes generate no lint errors
+* [X] My changes generate no lint errors
 - [x] New and existing unit tests pass locally with my changes
 ## :x: Uncompleted Tasks
 * [ ] I have made corresponding changes to the documentation
