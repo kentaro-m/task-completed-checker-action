@@ -39,7 +39,7 @@ For example:
 - [x] New and existing unit tests pass locally with my changes
 ```
 
-Create a pull request that containes a tasks list to your repository and GitHub will start automatically a workflow to check whether tasks are completed.
+Create a pull request that contains a tasks list to your repository and GitHub will start automatically a workflow to check whether tasks are completed.
 
 Every edit of the pull request description will automatically start a new workflow to check for completed tasks.
 
