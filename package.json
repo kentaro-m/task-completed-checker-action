@@ -1,6 +1,6 @@
 {
   "name": "task-completed-checker-action",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "An action that checks if all tasks are completed in the pull requests.",
   "main": "lib/main.js",
   "scripts": {
