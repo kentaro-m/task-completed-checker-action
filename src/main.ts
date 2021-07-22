@@ -14,11 +14,10 @@ async function run(): Promise<void> {
       core.info('no task list and skip the process.')
       await githubApi.checks.create({
         name: appName,
-        // eslint-disable-next-line @typescript-eslint/camelcase
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         head_sha: github.context.payload.pull_request?.head.sha,
         status: 'completed',
         conclusion: 'success',
-        // eslint-disable-next-line @typescript-eslint/camelcase
         completed_at: new Date().toISOString(),
         output: {
           title: appName,
@@ -45,11 +44,10 @@ async function run(): Promise<void> {
 
     await githubApi.checks.create({
       name: appName,
-      // eslint-disable-next-line @typescript-eslint/camelcase
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       head_sha: github.context.payload.pull_request?.head.sha,
       status: 'completed',
       conclusion: isTaskCompleted ? 'success' : 'failure',
-      // eslint-disable-next-line @typescript-eslint/camelcase
       completed_at: new Date().toISOString(),
       output: {
         title: appName,
@@ -62,8 +60,9 @@ async function run(): Promise<void> {
       repo: github.context.repo.repo
     })
   } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     core.setFailed(error.message)
   }
 }
 
-run()
+void run()

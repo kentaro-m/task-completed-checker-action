@@ -3652,11 +3652,10 @@ function run() {
                 core.info('no task list and skip the process.');
                 yield githubApi.checks.create({
                     name: appName,
-                    // eslint-disable-next-line @typescript-eslint/camelcase
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     head_sha: (_b = github.context.payload.pull_request) === null || _b === void 0 ? void 0 : _b.head.sha,
                     status: 'completed',
                     conclusion: 'success',
-                    // eslint-disable-next-line @typescript-eslint/camelcase
                     completed_at: new Date().toISOString(),
                     output: {
                         title: appName,
@@ -3677,11 +3676,10 @@ function run() {
             core.debug(text);
             yield githubApi.checks.create({
                 name: appName,
-                // eslint-disable-next-line @typescript-eslint/camelcase
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 head_sha: (_c = github.context.payload.pull_request) === null || _c === void 0 ? void 0 : _c.head.sha,
                 status: 'completed',
                 conclusion: isTaskCompleted ? 'success' : 'failure',
-                // eslint-disable-next-line @typescript-eslint/camelcase
                 completed_at: new Date().toISOString(),
                 output: {
                     title: appName,
@@ -3695,11 +3693,12 @@ function run() {
             });
         }
         catch (error) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             core.setFailed(error.message);
         }
     });
 }
-run();
+void run();
 
 
 /***/ }),
