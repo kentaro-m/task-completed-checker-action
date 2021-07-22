@@ -5,7 +5,7 @@ describe('removeIgnoreTaskListText', () => {
     const text = `## Issue Type
     <!-- ignore-task-list-start -->
     - [ ] Bug
-    - [ ] Document
+    * [ ] Document
     - [x] Enhancement Feature
     <!-- ignore-task-list-end -->
     
@@ -32,6 +32,9 @@ describe('removeIgnoreTaskListText', () => {
   it('removes single ignore task list from task list text.', () => {
     const text = `<!-- ignore-task-list-start -->
     - [ ] foo
+    - [x] qwer
+    * [ ] hello
+    * [x] world
     <!-- ignore-task-list-end -->
     - [x] bar`
 
@@ -57,7 +60,7 @@ describe('createTaskListText', () => {
     
     ## Checklist
     - [x] I have read the [CONTRIBUTING.md]()
-    - [x] I have made corresponding changes to the documentation
+    * [x] I have made corresponding changes to the documentation
     - [x] My changes generate no lint errors
     - [x] I have added tests that prove my fix is effective or that my feature works
     - [x] New and existing unit tests pass locally with my changes`
@@ -66,7 +69,7 @@ describe('createTaskListText', () => {
 
     expect(result).toEqual(`## :white_check_mark: Completed Tasks
 - [x] I have read the [CONTRIBUTING.md]()
-- [x] I have made corresponding changes to the documentation
+* [x] I have made corresponding changes to the documentation
 - [x] My changes generate no lint errors
 - [x] I have added tests that prove my fix is effective or that my feature works
 - [x] New and existing unit tests pass locally with my changes
@@ -79,8 +82,8 @@ describe('createTaskListText', () => {
     
     ## Checklist
     - [x] I have read the [CONTRIBUTING.md]()
-    - [ ] I have made corresponding changes to the documentation
-    - [x] My changes generate no lint errors
+    * [ ] I have made corresponding changes to the documentation
+    * [x] My changes generate no lint errors
     - [ ] I have added tests that prove my fix is effective or that my feature works
     - [x] New and existing unit tests pass locally with my changes`
 
@@ -88,10 +91,10 @@ describe('createTaskListText', () => {
 
     expect(result).toEqual(`## :white_check_mark: Completed Tasks
 - [x] I have read the [CONTRIBUTING.md]()
-- [x] My changes generate no lint errors
+* [x] My changes generate no lint errors
 - [x] New and existing unit tests pass locally with my changes
 ## :x: Uncompleted Tasks
-- [ ] I have made corresponding changes to the documentation
+* [ ] I have made corresponding changes to the documentation
 - [ ] I have added tests that prove my fix is effective or that my feature works
 `)
   })
