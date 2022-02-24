@@ -1,4 +1,4 @@
-export function removeIgnoreTaskLitsText(text: string): string {
+export function removeIgnoreTaskListText(text: string): string {
   return text.replace(
     /<!-- ignore-task-list-start -->[\s| ]*(- \[[x| ]\] .+[\s| ]*)+<!-- ignore-task-list-end -->/g,
     ''

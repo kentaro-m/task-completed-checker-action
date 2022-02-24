@@ -1,6 +1,6 @@
-import {removeIgnoreTaskLitsText, createTaskListText} from '../src/utils'
+import {removeIgnoreTaskListText, createTaskListText} from '../src/utils'
 
-describe('removeIgnoreTaskLitsText', () => {
+describe('removeIgnoreTaskListText', () => {
   it('removes multiple ignore task list from task list text.', () => {
     const text = `## Issue Type
     <!-- ignore-task-list-start -->
@@ -16,7 +16,7 @@ describe('removeIgnoreTaskLitsText', () => {
     - [x] I have added tests that prove my fix is effective or that my feature works
     - [x] New and existing unit tests pass locally with my changes`
 
-    const result = removeIgnoreTaskLitsText(text)
+    const result = removeIgnoreTaskListText(text)
 
     expect(result).toEqual(`## Issue Type
     
@@ -35,7 +35,7 @@ describe('removeIgnoreTaskLitsText', () => {
     <!-- ignore-task-list-end -->
     - [x] bar`
 
-    const result = removeIgnoreTaskLitsText(text)
+    const result = removeIgnoreTaskListText(text)
 
     expect(result).toEqual(`
     - [x] bar`)
@@ -44,7 +44,7 @@ describe('removeIgnoreTaskLitsText', () => {
   it('skips remove process if task list text does not contain ignore task list.', () => {
     const text = '- [x] bar'
 
-    const result = removeIgnoreTaskLitsText(text)
+    const result = removeIgnoreTaskListText(text)
 
     expect(result).toEqual('- [x] bar')
   })
