@@ -14,7 +14,7 @@ jobs:
   task-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: kentaro-m/task-completed-checker-action@v0.1.0
+      - uses: jartmez/task-completed-checker-action
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
