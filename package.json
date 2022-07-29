@@ -28,8 +28,8 @@
     "@actions/github": "^2.1.1"
   },
   "devDependencies": {
-    "@types/jest": "24.0.23",
-    "@types/node": "12.12.14",
+    "@types/jest": "24.9.1",
+    "@types/node": "12.20.55",
     "@typescript-eslint/parser": "2.10.0",
     "@zeit/ncc": "0.22.3",
     "eslint": "5.16.0",
