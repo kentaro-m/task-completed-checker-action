@@ -2,7 +2,7 @@ name: 'Task Completed Checker'
 description: 'An action that checks if all tasks are completed in the pull requests.'
 author: 'kentaro-m'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
 inputs: 
   repo-token:
