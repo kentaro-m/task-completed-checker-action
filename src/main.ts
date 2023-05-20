@@ -7,12 +7,12 @@ async function run(): Promise<void> {
     const body = github.context.payload.pull_request?.body
 
     const token = core.getInput('repo-token', {required: true})
-    const githubApi = new github.GitHub(token)
+    const githubApi = github.getOctokit(token)
     const appName = 'Task Completed Checker'
 
     if (!body) {
       core.info('no task list and skip the process.')
-      await githubApi.checks.create({
+      await githubApi.rest.checks.create({
         name: appName,
         // eslint-disable-next-line @typescript-eslint/camelcase
         head_sha: github.context.payload.pull_request?.head.sha,
@@ -43,7 +43,7 @@ async function run(): Promise<void> {
     core.debug('creates a list of completed tasks and uncompleted tasks: ')
     core.debug(text)
 
-    await githubApi.checks.create({
+    await githubApi.rest.checks.create({
       name: appName,
       // eslint-disable-next-line @typescript-eslint/camelcase
       head_sha: github.context.payload.pull_request?.head.sha,
@@ -62,7 +62,9 @@ async function run(): Promise<void> {
       repo: github.context.repo.repo
     })
   } catch (error) {
-    core.setFailed(error.message)
+    if (error instanceof Error) {
+      core.setFailed(error.message)
+    }
   }
 }
 
