@@ -5,6 +5,10 @@ export function removeIgnoreTaskLitsText(text: string): string {
   )
 }
 
+export function hasTaskList(body: string): boolean {
+  return body.match(/(- \[(x| )\].+)/g) !== null
+}
+
 export function createTaskListText(body: string): string {
   const completedTasks = body.match(/(- \[[x]\].+)/g)
   const uncompletedTasks = body.match(/(- \[[ ]\].+)/g)

@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import {removeIgnoreTaskLitsText, createTaskListText} from './utils'
+import {removeIgnoreTaskLitsText, createTaskListText, hasTaskList} from './utils'
 
 async function run(): Promise<void> {
   try {
@@ -10,7 +10,7 @@ async function run(): Promise<void> {
     const githubApi = github.getOctokit(token)
     const appName = 'Task Completed Checker'
 
-    if (!body) {
+    if (!body || !hasTaskList(body)) {
       core.info('no task list and skip the process.')
       await githubApi.rest.checks.create({
         name: appName,
