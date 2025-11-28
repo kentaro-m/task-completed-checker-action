@@ -73,6 +73,28 @@ describe('createTaskListText', () => {
 `)
   })
 
+  it('creates a list of completed tasks using uppercase X', () => {
+    const text = `## Issue Type
+
+
+    ## Checklist
+    - [X] I have read the [CONTRIBUTING.md]()
+    - [X] I have made corresponding changes to the documentation
+    - [X] My changes generate no lint errors
+    - [X] I have added tests that prove my fix is effective or that my feature works
+    - [X] New and existing unit tests pass locally with my changes`
+
+    const result = createTaskListText(text)
+
+    expect(result).toEqual(`## :white_check_mark: Completed Tasks
+- [X] I have read the [CONTRIBUTING.md]()
+- [X] I have made corresponding changes to the documentation
+- [X] My changes generate no lint errors
+- [X] I have added tests that prove my fix is effective or that my feature works
+- [X] New and existing unit tests pass locally with my changes
+`)
+  })
+
   it('creates a list of completed tasks and uncompleted tasks', () => {
     const text = `## Issue Type
     

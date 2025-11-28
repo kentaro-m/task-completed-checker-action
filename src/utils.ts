@@ -6,7 +6,7 @@ export function removeIgnoreTaskLitsText(text: string): string {
 }
 
 export function createTaskListText(body: string): string {
-  const completedTasks = body.match(/(- \[[x]\].+)/g)
+  const completedTasks = body.match(/(- \[[x]\].+)/ig)
   const uncompletedTasks = body.match(/(- \[[ ]\].+)/g)
 
   let text = ''
