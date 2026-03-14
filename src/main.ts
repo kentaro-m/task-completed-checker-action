@@ -55,7 +55,7 @@ async function run(): Promise<void> {
         title: appName,
         summary: isTaskCompleted
           ? 'All tasks are completed!'
-          : 'Some tasks are uncompleted!',
+          : 'Some tasks are incomplete!',
         text
       },
       owner: github.context.repo.owner,
